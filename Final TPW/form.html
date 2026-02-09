@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
+        }
+        
+        .form-header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .radio-group label,
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        
+        .radio-group input,
+        .checkbox-group input {
+            margin-right: 8px;
+        }
+        
+        .text-area-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .form-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>Application Form</h1>
+            <p>Please fill in all required information accurately</p>
+        </div>
+        
+        <div class="page-indicator">
+            <span id="page-number">Page 1 of 2</span>
+        </div>
+        
+        <form id="applicationForm">
+            <!-- Page 1: Personal Information -->
+            <div class="page active" id="page1">
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="name">First Name *</label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="error" id="name-error">Please enter your first name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="surname">Surname *</label>
+                        <input type="text" id="surname" name="surname" required>
+                        <div class="error" id="surname-error">Please enter your surname</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact">Contact Number *</label>
+                        <input type="tel" id="contact" name="contact" required pattern="[0-9]{10,}">
+                        <div class="error" id="contact-error">Please enter a valid contact number (minimum 10 digits)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="altContact">Alternative Contact Number</label>
+                        <input type="tel" id="altContact" name="altContact">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error" id="email-error">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" id="dob" name="dob" required>
+                        <div class="error" id="dob-error">Please enter your date of birth</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age </label>
+                        <input type="number" id="age" name="age" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Gender *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="Male" required> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Other"> Other</label>
+                            <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+                        </div>
+                        <div class="error" id="gender-error">Please select your gender</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idNumber">ID/Passport Number *</label>
+                        <input type="text" id="idNumber" name="idNumber" required>
+                        <div class="error" id="idNumber-error">Please enter your ID or Passport number</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ethnicGroup">Ethnic Group *</label>
+                        <select id="ethnicGroup" name="ethnicGroup" required>
+                            <option value="">Select Ethnic Group</option>
+                            <option value="African">African</option>
+                            <option value="White">White</option>
+                            <option value="Asian">Asian</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Coloured">Coloured</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error" id="ethnicGroup-error">Please select your ethnic group</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="homeLanguage">Home Language *</label>
+                        <select id="homeLanguage" name="homeLanguage" required>
+                            <option value="">Select Home Language</option>
+                            <option value="English">English</option>
+                            <option value="Afrikaans">Afrikaans</option>
+                            <option value="isiZulu">isiZulu</option>
+                            <option value="isiXhosa">isiXhosa</option>
+                            <option value="Sepedi">Sepedi</option>
+                            <option value="Setswana">Setswana</option>
+                            <option value="Sesotho">Sesotho</option>
+                            <option value="Xitsonga">Xitsonga</option>
+                            <option value="SiSwati">SiSwati</option>
+                            <option value="Tshivenda">Tshivenda</option>
+                            <option value="isiNdebele">isiNdebele</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error" id="homeLanguage-error">Please select your home language</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="highestGrade">Highest Grade Completed *</label>
+                        <select id="highestGrade" name="highestGrade" required>
+                            <option value="">Select Grade Level</option>
+                            <option value="Grade R">Grade R</option>
+                            <option value="Grade 1">Grade 1</option>
+                            <option value="Grade 2">Grade 2</option>
+                            <option value="Grade 3">Grade 3</option>
+                            <option value="Grade 4">Grade 4</option>
+                            <option value="Grade 5">Grade 5</option>
+                            <option value="Grade 6">Grade 6</option>
+                            <option value="Grade 7">Grade 7</option>
+                            <option value="Grade 8">Grade 8</option>
+                            <option value="Grade 9">Grade 9</option>
+                            <option value="Grade 10">Grade 10</option>
+                            <option value="Grade 11">Grade 11</option>
+                            <option value="Grade 12">Grade 12</option>
+                            <option value="Higher Education - Certificate">Higher Education - Certificate</option>
+                            <option value="Higher Education - Diploma">Higher Education - Diploma</option>
+                            <option value="Higher Education - Degree">Higher Education - Degree</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error" id="highestGrade-error">Please select your highest grade</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Residential Address *</label>
+                        <textarea id="address" name="address" rows="3" required maxlength="1000"></textarea>
+                        <div class="text-area-note">Maximum 100 words</div>
+                        <div class="error" id="address-error">Please enter your residential address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Source of Income *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="incomeSource" value="Grant" required> Grant</label>
+                            <label><input type="radio" name="incomeSource" value="Other"> Other</label>
+                        </div>
+                        <div class="error" id="income-error">Please select source of income</div>
+                        
+                        <div id="otherIncomeField" class="form-group hidden">
+                            <label for="otherIncome">Please specify other source of income *</label>
+                            <input type="text" id="otherIncome" name="otherIncome">
+                            <div class="error" id="otherIncome-error">Please specify your source of income</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Contact Method *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="contactMethod" value="Email" required> Email</label>
+                            <label><input type="radio" name="contactMethod" value="Call"> Call</label>
+                            <label><input type="radio" name="contactMethod" value="SMS"> SMS</label>
+                        </div>
+                        <div class="error" id="contactMethod-error">Please select preferred contact method</div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button type="button" class="btn" id="nextBtn">Next Page</button>
+                </div>
+            </div>
+            
+            <!-- Page 2: Household Information & Needs -->
+            <div class="page" id="page2">
+                <div class="form-section">
+                    <h3>Household Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="dependants">Number of Dependants *</label>
+                        <input type="number" id="dependants" name="dependants" min="0" required>
+                        <div class="error" id="dependants-error">Please enter number of dependants</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Who do you live with? *</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="liveWith" value="Both Parents"> Both Parents</label>
+                            <label><input type="checkbox" name="liveWith" value="Mother"> Mother</label>
+                            <label><input type="checkbox" name="liveWith" value="Father"> Father</label>
+                            <label><input type="checkbox" name="liveWith" value="Other" id="liveWithOther"> Other</label>
+                        </div>
+                        <div class="error" id="liveWith-error">Please select who you live with</div>
+                        
+                        <div id="otherLiveWithField" class="form-group hidden">
+                            <label for="otherLiveWith">Please specify who you live with *</label>
+                            <input type="text" id="otherLiveWith" name="otherLiveWith">
+                            <div class="error" id="otherLiveWith-error">Please specify who you live with</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Is anyone employed in the current household? *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="employed" value="Yes" required> Yes</label>
+                            <label><input type="radio" name="employed" value="No"> No</label>
+                        </div>
+                        <div class="error" id="employed-error">Please select employment status</div>
+                        
+                        <div id="employedDetailsField" class="form-group hidden">
+                            <label for="employedDetails">Please provide details of employment *</label>
+                            <textarea id="employedDetails" name="employedDetails" rows="3" maxlength="1000"></textarea>
+                            <div class="text-area-note">Maximum 100 words</div>
+                            <div class="error" id="employedDetails-error">Please provide employment details</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Immediate Needs / Support Required</h3>
+                    
+                    <div class="form-group">
+                        <label for="supportType">Type of Support Needed *</label>
+                        <select id="supportType" name="supportType" required>
+                            <option value="">-- Select Support Type --</option>
+                            <option value="Student Support">Student Support </option>
+                            <option value="Employment Support">Employment Support</option>
+                            <option value="Medical Attention">Medical Support - Medical Attention</option>
+                            <option value="Counselling">Medical Support - Counselling</option>
+                            <option value="Hygiene Support">Hygiene Support</option>
+                            <option value="Food Parcel">Food Parcel</option>
+                            <option value="Emergency Shelter">Emergency Shelter / Accommodation</option>
+                            <option value="None">No Support Needed</option>
+                        </select>
+                        <div class="error" id="supportType-error">Please select a support type</div>
+                    </div>
+                    
+                    <div id="supportDetailsField" class="form-group hidden">
+                        <label for="supportDetails">Please provide details about the support needed *</label>
+                        <textarea id="supportDetails" name="supportDetails" rows="4" maxlength="1000"></textarea>
+                        <div class="text-area-note">Maximum 100 words</div>
+                        <div class="error" id="supportDetails-error">Please provide support details</div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button type="button" class="btn btn-secondary" id="prevBtn">Previous Page</button>
+                    <button type="submit" class="btn" id="submitBtn">Submit Application</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            <h3>✓ Application Submitted Successfully!</h3>
+            <p>Your application has been recorded. Your unique reference number is: <strong id="referenceNumber"></strong></p>
+            <p>Please save this reference number for future correspondence.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
